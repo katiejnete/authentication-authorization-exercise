@@ -1,0 +1,25 @@
+{% extends 'register_form.html' %} 
+
+{% block title %}Login{% endblock %} 
+
+{% block heading %}
+  <h1>Login</h1>
+{% endblock %} 
+
+{% block content %} 
+  {% if get_flashed_messages() %} 
+    {% for msg in get_flashed_messages() %}
+      <p>{{msg}}</p>
+    {% endfor %} 
+  {% endif %}
+  <form action="/login" method="post">
+    {{form.hidden_tag()}} 
+      {% for field in form if field.widget.input_type != 'hidden' %}
+        <div>{{field.label}} {{field}}</div>
+        {% for err in field.errors %} 
+          <p>{{err}}</p>
+        {% endfor %} 
+      {% endfor %}
+    <button>Submit</button>
+  </form>
+{% endblock %}

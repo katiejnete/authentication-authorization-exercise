@@ -1,0 +1,13 @@
+{% extends 'register_form.html' %}{% block title %}Feedback Page{% endblock %}
+
+{% block heading %}
+  <h1>{{feedback.title}}</h1>
+{% endblock %} 
+
+{% block content %} 
+  {{feedback.content}}
+  <form action="/feedback/{{feedback.id}}/update">
+    <button>Update</button>
+    <button formaction="/feedback/{{feedback.id}}/delete" formmethod="post">Delete</button>
+  </form>
+{% endblock %}

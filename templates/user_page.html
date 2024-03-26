@@ -1,0 +1,31 @@
+{% extends 'register_form.html' %}
+
+{% block title %}{{user.first_name}} Page{% endblock %} 
+
+{% block heading %}
+  <h1>Hello {{user.first_name}}.</h1>
+{% endblock %} 
+
+{% block content %} 
+  {% if get_flashed_messages() %} {% for msg in get_flashed_messages() %}
+  <p>{{msg}}</p>
+  {% endfor %} {% endif %}
+<ul>
+    <li><b>Username:</b> {{user.username}}</li>
+    <li><b>E-mail:</b> {{user.email}}</li>
+    <li><b>First Name:</b> {{user.first_name}}</li>
+    <li><b>Last Name:</b> {{user.last_name}}</li>
+</ul>
+<h2>Feedback</h2>
+<ul>
+  {% for f in feedback %}
+    <li>
+      <a href="/feedback/{{f.id}}">{{f.title}}</a>
+    </li>
+  {% endfor %}
+</ul>
+<form action="/users/{{user.username}}/delete" method="post">
+  <button formaction="/users/{{user.username}}/feedback/add" formmethod="get">Add Feedback</button>
+  <button>Delete My Account</button>
+</form>
+{% endblock %}
